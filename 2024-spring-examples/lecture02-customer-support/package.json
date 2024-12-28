@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18"
+  },
+  "scripts": {
+    "start": "ts-node repl.ts"
+  }
+}

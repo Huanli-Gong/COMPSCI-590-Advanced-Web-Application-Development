@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "primes1": "ts-node primes1.ts",
+    "primes2": "ts-node primes2.ts"
+  },
+  "devDependencies": {
+    "@types/node": "18"
+  }
+}

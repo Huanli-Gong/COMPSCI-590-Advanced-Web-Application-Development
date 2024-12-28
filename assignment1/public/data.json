@@ -1,0 +1,52 @@
+[
+    {
+        "problem": "Which of the following is not a fruit?",
+        "choices": [
+            "apple",
+            "orange",
+            "banana",
+            "prime rib"
+        ],
+        "correctChoiceIndex": 3
+    },
+    {
+        "problem": "Which number is a prime number?",
+        "choices": [
+            "4",
+            "6",
+            "9",
+            "7"
+        ],
+        "correctChoiceIndex": 3
+    },
+    {
+        "problem": "Which of these is a mammal?",
+        "choices": [
+            "shark",
+            "dolphin",
+            "octopus",
+            "seahorse"
+        ],
+        "correctChoiceIndex": 1
+    },
+    {
+        "problem": "What is the capital of France?",
+        "choices": [
+            "Berlin",
+            "London",
+            "Paris",
+            "Rome"
+        ],
+        "correctChoiceIndex": 2
+    },
+    {
+        "problem": "Which element's chemical symbol is Na?",
+        "choices": [
+            "Nitrogen",
+            "Nickel",
+            "Neon",
+            "Sodium"
+        ],
+        "correctChoiceIndex": 3
+    }
+]

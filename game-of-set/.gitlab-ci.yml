@@ -1,0 +1,54 @@
+stages:
+  - build
+  - deploy
+  - test
+
+node-job:
+  image: node:latest
+  stage: build
+  script:
+    - cd server
+    - npm install
+    - npm run build
+    - cd ..
+    - cd ui
+    - npm install
+    - npm run build
+
+docker-job:
+  image: docker:25.0.3
+  stage: build
+  script:
+    - echo "Building Docker Images for Server and UI"
+    - cd server
+    - docker build -t game-of-set-server .
+    - cd ../ui
+    - docker build -t game-of-set-ui .
+
+deploy-job:
+  stage: deploy
+  script:
+    - kubectl create -f k8s/
+    - sleep 5
+    - echo "Finished deployment"
+
+test-job:
+  stage: test
+  script:
+    - echo "Port-forwarding"
+    - kubectl port-forward service/db 27017:27017 &
+    - MONGO_PORT_FORWARD_PID=$!
+    - echo $MONGO_PORT_FORWARD_PID
+    - kubectl port-forward service/redis 6379:6379 &
+    - REDIS_PORT_FORWARD_PID=$!
+    - echo $REDIS_PORT_FORWARD_PID
+    - kubectl scale deployment.apps/server --replicas=6
+    - echo "Running end-to-end tests"
+    - npm ci
+    - npx playwright test # explicit headless specified in playwright.config.ts
+    - echo "Delete all deployment files"
+    - kill $MONGO_PORT_FORWARD_PID
+    - kill $REDIS_PORT_FORWARD_PID
+    - kubectl delete -f k8s/
+    - echo "Tests completed successfully"
+  timeout: 1 minute
